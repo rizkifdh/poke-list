@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.37.1",
+    "@tanstack/react-query-devtools": "^5.37.1",
     "framer-motion": "^11.2.4",
     "preact": "^10.19.6",
     "preact-router": "^4.1.2",

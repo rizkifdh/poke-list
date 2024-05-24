@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { baseUrl } from "./lib/base-url";
 import { Fragment } from "preact";
 import { useState, useEffect } from "preact/hooks";
-import type { pokemonList } from "./types/pokemon-list";
+import type { PokemonList } from "./types/pokemon-list";
 import { PokemonCard } from "./components/pokemon-card";
 import { BiSearch } from "react-icons/bi";
+import { Loading } from "./components/loading";
 
 export function Pokemon() {
   const [currentPage, setcurrentPage] = useState(1);
@@ -14,12 +15,12 @@ export function Pokemon() {
   const maxItems = 20;
 
   const fetchPokemon = async () => {
-    const response = await fetch(`${baseUrl}/pokemon?limit=1302`);
+    const response = await fetch(`${baseUrl}/pokemon?limit=1302&offset=0`);
     const data = await response.json();
     return data.results;
   };
 
-  const { data, error, isLoading } = useQuery({
+  const { data, error, isLoading } = useQuery<PokemonList>({
     queryKey: ["pokemonList"],
     queryFn: fetchPokemon,
   });
@@ -27,7 +28,7 @@ export function Pokemon() {
   useEffect(() => {
     if (data) {
       setfilteredData(
-        data.filter((pokemon: pokemonList["results"]) =>
+        data.filter((pokemon: PokemonList["results"]) =>
           pokemon.name.toLowerCase().includes(searchQuery.toLowerCase())
         )
       );
@@ -57,7 +58,12 @@ export function Pokemon() {
     setsearchQuery(target.value);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <>
+        <Loading />
+      </>
+    );
 
   if (error) return <div>An error has occurred: {error.message}</div>;
 
@@ -78,7 +84,7 @@ export function Pokemon() {
         </label>
         <div class="flex flex-col pt-5 gap-10 md:grid md:grid-cols-2">
           {paginatedData.length > 0 ? (
-            paginatedData.map((pokemon: pokemonList["results"]) => (
+            paginatedData.map((pokemon: PokemonList["results"]) => (
               <Fragment key={pokemon.name}>
                 <PokemonCard url={pokemon.url} />
               </Fragment>

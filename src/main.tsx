@@ -6,6 +6,7 @@ import { Pokemon } from "./pokemon";
 import { Header } from "./components/header";
 import { PokemonDetail } from "./pokemon-detail";
 import { Footer } from "./components/footer";
+
 const queryClient = new QueryClient();
 
 const Main = () => {

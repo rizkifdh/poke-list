@@ -1,4 +1,5 @@
-export interface pokemonList {
+export interface PokemonList {
+  filter: any;
   count: number;
   next?: string;
   previous?: string;
