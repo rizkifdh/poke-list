@@ -88,16 +88,18 @@ export function PokemonDetail({ name }: { name: string }) {
               <p>stats :</p>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-10">
                 {detailPokemon.stats.map((stats: PokemonDetail["stats"]) => (
-                  <div class="flex flex-col items-center gap-3">
-                    <p class="text-center">{stats.stat.name}</p>
-                    <div
-                      class="radial-progress bg-secondary text-secondary-content border-4 border-secondary text-2xl"
-                      style={{ "--value": stats.base_stat }}
-                      role="progressbar"
-                    >
-                      {stats.base_stat}
+                  <Fragment key={stats.stat.name}>
+                    <div class="flex flex-col items-center gap-3">
+                      <p class="text-center">{stats.stat.name}</p>
+                      <div
+                        class="radial-progress bg-secondary text-secondary-content border-4 border-secondary text-2xl"
+                        style={{ "--value": stats.base_stat }}
+                        role="progressbar"
+                      >
+                        {stats.base_stat}
+                      </div>
                     </div>
-                  </div>
+                  </Fragment>
                 ))}
               </div>
             </div>
