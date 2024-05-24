@@ -5,7 +5,7 @@ export function BackButton() {
     window.history.back();
   };
   return (
-    <div class="pt-2">
+    <div class="pt-7">
       <button
         class="btn btn-circle text-4xl bg-secondary border-none"
         onClick={handleBack}
