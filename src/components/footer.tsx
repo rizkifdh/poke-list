@@ -1,7 +1,7 @@
 export function Footer() {
   const date = new Date();
   return (
-    <footer className="footer footer-center p-4 bg-secondary text-base-content">
+    <footer class="footer footer-center p-4 bg-secondary text-base-content">
       <aside>
         <p>
           copyright © {date.getFullYear()} -{" "}
